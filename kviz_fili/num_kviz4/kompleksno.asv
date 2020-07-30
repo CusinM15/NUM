@@ -1,0 +1,31 @@
+n = 10;
+x_k = @(k) 5 * (k - 1) / (n - 1);
+re_diag = ones(n, 1);
+im_diag = ones(n, 1) * 2.2;
+re_b = ones(n, 1);
+im_b = ones(n, 1) * 0.13;
+for i = 1: n
+    a(i) = x_k(i);
+end
+a
+norm(a)
+    
+
+for i = 1: n
+    re_diag(i) = 5 + 2.15 * x_k(i);
+    re_b(i) = sin(x_k(i));
+end
+
+nad_re = ones(n, 1);
+nad_im = ones(n, 1);
+for i = 1: n - 1
+    nad_re(i) = -1 * sin(0.26 * x_k(i));
+    nad_im(i) = cos(0.13 * x_k(i));
+end
+
+Re = spdiags([re_diag, nad_re], [0, 1], n, n);
+Im = spdiags([im_diag, nad_im], [0, 1], n, n);
+A = [Re, -1 * Im; Im, Re];
+b = [re_b; im_b];
+x = A \ b;
+%norm(x)
