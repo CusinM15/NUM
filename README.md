@@ -1,2 +1,2 @@
-# NUM
-Numerične
+# Numerične
+predvsem algoritmi v matlabu
